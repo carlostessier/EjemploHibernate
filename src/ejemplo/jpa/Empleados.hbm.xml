@@ -1,14 +1,14 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 25-may-2018 1:11:20 by Hibernate Tools 4.3.1 -->
+<!-- Generated 25-may-2018 1:36:00 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="ejemplo.entity.Empleados" table="empleados" catalog="ejemplo" optimistic-lock="version">
+    <class name="ejemplo.jpa.Empleados" table="empleados" catalog="ejemplo" optimistic-lock="version">
         <id name="empNo" type="short">
             <column name="emp_no" />
             <generator class="assigned" />
         </id>
-        <many-to-one name="departamentos" class="ejemplo.entity.Departamentos" fetch="select">
+        <many-to-one name="departamentos" class="ejemplo.jpa.Departamentos" fetch="select">
             <column name="dept_no" not-null="true" />
         </many-to-one>
         <property name="apellido" type="string">

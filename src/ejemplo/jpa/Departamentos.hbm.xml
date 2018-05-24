@@ -1,9 +1,9 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 25-may-2018 1:11:20 by Hibernate Tools 4.3.1 -->
+<!-- Generated 25-may-2018 1:36:00 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-    <class name="ejemplo.entity.Departamentos" table="departamentos" catalog="ejemplo" optimistic-lock="version">
+    <class name="ejemplo.jpa.Departamentos" table="departamentos" catalog="ejemplo" optimistic-lock="version">
         <id name="deptNo" type="byte">
             <column name="dept_no" />
             <generator class="assigned" />
@@ -18,7 +18,7 @@
             <key>
                 <column name="dept_no" not-null="true" />
             </key>
-            <one-to-many class="ejemplo.entity.Empleados" />
+            <one-to-many class="ejemplo.jpa.Empleados" />
         </set>
     </class>
 </hibernate-mapping>
