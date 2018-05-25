@@ -5,50 +5,46 @@
  */
 package hibernate;
 
+import ejemplo.dao.EmpleadoDAOImp;
 import java.util.Date;
 
-import org.hibernate.Session;
 
 import ejemplo.jpa.Empleados;
 import ejemplo.jpa.Departamentos;
-import ejemplo.utilidades.Utilidades;
+import ejemplo.service.EmpleadoServicio;
 
 public class Hibernate {
 	public static void main(String[] args) {
                 System.out.println("Ejemplo Hibernate");
-            
-                Departamentos dep = new Departamentos();
-                dep.setDeptNo((byte)1);
+                
+                EmpleadoServicio empServ = new EmpleadoServicio();            
+               
 		Empleados emp = new Empleados();
-		Empleados empR;
+                Empleados empR;
 		emp.setApellido("Pepito");
-		emp.setEmpNo((short)1);
-		emp.setDepartamentos(dep);
+		emp.setEmpNo((short)2);
+		emp.setDepartamentos(new Departamentos((byte)1,null,null,null));
                 emp.setFechaAlt(new Date());
                 emp.setOficio("Hibernate");
-                emp.setSalario(1000.0f);               
-               
-		// Conseguimos un objeto sesión para comunicarnos con la BD
-		Session session = Utilidades.getSessionFactory().openSession();
-		
-		// abrimos una transacción
-		session.beginTransaction();
-		// Guardamos el objeto en la sesión
-                System.out.println("Guardando objeto");
-		session.save(emp);
-		// Commit de la transacción: sino no se hace persistente en BD, sólo actualiza el objeto
-		// session.getTransaction().commit();
-		System.out.println("Employee ID=" + emp.getEmpNo());
-				
-		//Recuperamos un objeto cuyo identificador conocemos
-		//session.beginTransaction();
-                System.out.println("Cargamos objeto");
-		empR=(Empleados)session.load(Empleados.class,  emp.getEmpNo());
-		//session.getTransaction().commit();
-		System.out.println("Employee=" +empR.getEmpNo()+":"+ empR.getApellido()+":"+empR.getOficio());		
+                emp.setSalario(1000.0f);  
+                
+               	System.out.println("Guardamos Employee ID=" + emp.getEmpNo());
 
-		// Cerramos la factoria de sesiones, sino el programa no finalizará
-		Utilidades.getSessionFactory().close();
+                //empServ.addEmpelado(emp);                  
+	
+                System.out.println("Cargamos objeto");
+		empR = empServ.getEmpleado(emp.getEmpNo()); 		
+		
+		System.out.println("Employee=" +empR.getEmpNo()+":"+ empR.getApellido()+":"+empR.getOficio());	
+                
+                for(Empleados empl: empServ.getEmpleados()){
+                    System.out.println(empl.getEmpNo() +" "+ empl.getApellido());
+                }
+                
+                for(Object[] cad: empServ.getEmpleadoPorDep((short)1)){
+                    System.out.println(cad[0]+" "+cad[1]);
+                }
+
 	}
 
 }
