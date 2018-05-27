@@ -18,7 +18,7 @@ public interface EmpleadoDAO {
     public Session getCurrentSession();
 
     /*	Crear un método que devuelva en todos los objetos empleados de un departamento dado. */
-    public List<Object[]> getEmpleadoPorDep(short depNo);
+    public List<Object[]> getEmpleadoPorDep(byte depNo);
 
     /*Crear un método que devuelva el objeto empleado con el máximo salario.*/
     public Empleados getEmpleadoMaxSalario();
@@ -26,6 +26,10 @@ public interface EmpleadoDAO {
     public List<Empleados> getEmpleados();
 
     public Empleados getEmpleado(short depNo);
+    
+    public Empleados loadEmpleado(short empNo);
+    
+    public void persist(Empleados empleado);
 
     public void updateEmpleado(Empleados empleado);
 

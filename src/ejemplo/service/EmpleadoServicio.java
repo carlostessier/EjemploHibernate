@@ -29,7 +29,7 @@ public class EmpleadoServicio {
 
     }
 
-    public List<Object[]> getEmpleadoPorDep(short depNo) {
+    public List<Object[]> getEmpleadoPorDep(byte depNo) {
         emplDAO.openCurrentSession();
         List<Object[]> listado = emplDAO.getEmpleadoPorDep(depNo);
         emplDAO.closeCurrentSession();
@@ -75,6 +75,14 @@ public class EmpleadoServicio {
         emplDAO.openCurrentSessionwithTransaction();
         emplDAO.addEmpelado(empleado);
         emplDAO.closeCurrentSessionwithTransaction();
+    }
+    
+    public void loadEmpleado(short depNo) {
+        emplDAO.openCurrentSessionwithTransaction();
+         Empleados emp = emplDAO.loadEmpleado(depNo);
+         System.out.printf("Empleado: %s con sueldo %f\n",emp.getEmpNo(),emp.getSalario());
+        emplDAO.closeCurrentSessionwithTransaction();
+        
     }
 
     public EmpleadoDAOImp emplDAO() {
